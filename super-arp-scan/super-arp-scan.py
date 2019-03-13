@@ -92,7 +92,7 @@ if __name__ == "__main__":
     init()
     print "choose network type : \n"
     print "    1) tp-link 默认家用 (192.168.1.0/24)"
-    print "    2) tp-link 默认家用 (与网关冲突时) (192.168.0.0、24)"
+    print "    2) tp-link 默认家用 (与网关冲突时) (192.168.0.0/24)"
     print "    3) mi 默认家用 (192.168.31/24)"
     choose = raw_input()
     oper(choose)
