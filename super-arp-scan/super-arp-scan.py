@@ -48,7 +48,7 @@ def oper(oper, mip = None, mmac = None, ip3 = None):
     anslist = []
     addr = Ether() / ARP()
     addr.pdst = genAddrsFromChoose(oper)
-    if addr is None:
+    if addr.pdst is None:
         print "非法输入!"
         return
     if mip != None:
