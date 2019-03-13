@@ -33,14 +33,24 @@ def ans_cmp(x, y):
         return -1
     return 0
 
+def genAddrsFromChoose(oper):
+    if (oper == "1"):
+        return ["192.168.1.%d" % ip4 for ip4 in range(1, 255)]
+    elif (oper == "2"):
+        return ["192.168.0.%d" % ip4 for ip4 in range(1, 255)]
+    elif (oper == "3"):
+        return ["192.168.31.%d" % ip4 for ip4 in range(1, 255)]
+    else:
+        return None
+
 def oper(oper, mip = None, mmac = None, ip3 = None):
     time_start = time.time()
     anslist = []
     addr = Ether() / ARP()
-    if(oper == "1"):
-        addr.pdst = ["192.168.1.%d" % ip4 for ip4 in range(1, 255)]
-    if(oper == "2"):
-        addr.pdst = ["192.168.31.%d" % ip4 for ip4 in range(1, 255)]
+    addr.pdst = genAddrsFromChoose(oper)
+    if addr is None:
+        print "非法输入!"
+        return
     if mip != None:
         addr.src = mac_src
     if mmac != None:
@@ -82,9 +92,7 @@ if __name__ == "__main__":
     init()
     print "choose network type : \n"
     print "    1) tp-link 默认家用 (192.168.1.0/24)"
-    print "    2) mi 默认家用 (192.168.31/24)"
+    print "    2) tp-link 默认家用 (与网关冲突时) (192.168.0.0、24)"
+    print "    3) mi 默认家用 (192.168.31/24)"
     choose = raw_input()
-    if choose == "1":
-        oper(choose)
-    if choose == "2":
-        oper(choose)
+    oper(choose)
